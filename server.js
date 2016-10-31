@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var port = process.env.PORT || 8080;
 var serverConfig = express();
-var configurationFile = 'gatewayConfig.json';
+var configurationFile = '/etc/knot/gatewayConfig.json';
 var keysFile = 'keys.json';
 
 function writeFile(type, incomingData, successCallback, errorCallback) {
@@ -108,7 +108,7 @@ serverConfig.post('/administration/save', function (req, res) {
 
 serverConfig.get('/administration/info', function (req, res) {
   var obj;
-  fs.readFile('gatewayConfig.json', 'utf8', function (err, data) {
+  fs.readFile(configurationFile, 'utf8', function (err, data) {
     var admObject;
 
     if (err) {
@@ -149,7 +149,7 @@ serverConfig.post('/network/save', function (req, res) {
 
 serverConfig.get('/network/info', function (req, res) {
   var obj;
-  fs.readFile('gatewayConfig.json', 'utf8', function (err, data) {
+  fs.readFile(configurationFile, 'utf8', function (err, data) {
     if (err) {
       throw err;
     }
